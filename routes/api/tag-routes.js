@@ -20,16 +20,20 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
-  Tag.findOne({ where: { id: req.params.id }, include: Product
-    .then((productData) => {
-      res.status(200).json(productData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-}),
+  Tag.findByPk(req.params.id, {
+    include: [{ model: Product }],
+  })
+    .then((tagData) => {
+      if (!tagData) {
+        res.status(404).json();
+        return;
+      }
+      res.status(200).json(tagData);
+    });
 });
-});
+
+
+
 
 router.post('/', (req, res) => {
   // create a new tag

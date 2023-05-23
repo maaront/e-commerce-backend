@@ -47,32 +47,38 @@ router.post('/', (req, res) => {
   });
   });
 
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   // update a category by its `id` value
-  Category.update({ category_name: req.body.category_name }, { where: { id: req.params.id }
-  .then((categoryData) => {
-    res.status(200).json(categoryData);
+  Category.update(req.body, {
+      where: { id: req.params.id },
   })
-  .catch((err) => {
-    console.log(err);
-    res.status(500).json(err);
-  }),
-});
+      .then((categoryData) => {
+          res.status(200).json(categoryData);
+      })
+      .catch((error) => {
+          console.log(error);
+          res.status(500).json({ message: "Internal server error" });
+      });
 });
 
 
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
-  Category.destroy({ where: { id: req.params.id }
+  Category.destroy({
+    where: { id: req.params.id }
+  })
     .then((categoryData) => {
-      res.status(200).json(categoryData);
+      if (categoryData === 0) {
+        res.status(404).json({ message: 'No category found with this id!' });
+        return;
+      }
+      res.status(200).json({ message: 'Category deleted successfully' });
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    }),
-  });
-  });
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ message: 'Internal server error' });
+    });
+});
 
 module.exports = router;
