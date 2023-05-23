@@ -4,9 +4,9 @@
 The Ecommerce Backend is a backend application for an ecommerce company. It provides a functional Express.js API for managing categories, products, and tags. The application uses MySQL as the database and Sequelize as the ORM (Object-Relational Mapping) tool to interact with the database. It allows users to perform various operations such as creating, updating, and deleting data in the database. The API routes are designed to handle requests related to categories, products, and tags, providing formatted JSON responses.
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/your-username/ecommerce-backend`
-2. Navigate to the project directory: `cd ecommerce-backend`
-3. Install the dependencies: `npm install`
+1. Clone the repository: `git clone https://github.com/maaront/e-commerce-backend`
+2. Navigate to the project directory: `cd e-commerce-backend`
+3. Install the dependencies: `npm i`
 4. Set up your MySQL database and update the connection details in the `.env` file
 5. Run the schema and seed commands to create the development database and seed it with test data:
    `npm run seed`
